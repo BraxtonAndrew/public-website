@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>braxtonandrew.com</title>
+<meta name="description" content="Braxton Andrew's workbench: cloud, infrastructure, and homelab projects in progress.">
+<style>
+  :root {
+    --bg:       #222D31;  /* background */
+    --fg:       #d8d8d8;  /* main text */
+    --dim:      #585858;  /* decoration only, low contrast */
+    --muted:    #8a9a9e;  /* readable secondary text */
+    --accent:   #7cc293;  /* direct hue swap of #7cafc2 (blue -> green) */
+    --prompt:   #1ABB9B;  /* cyan from the terminal theme */
+    --select:   #16A085;  /* selection / hover */
+    --amber:    #f7ca88;  /* rare highlight */
+  }
+
+  * { box-sizing: border-box; }
+
+  html { background: var(--bg); }
+
+  body {
+    margin: 0;
+    padding: 2.5rem 1.25rem 4rem;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: "JetBrains Mono", "Fira Code", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+    font-size: 16px;
+    line-height: 1.65;
+  }
+
+  main { max-width: 52rem; margin: 0 auto; }
+
+  ::selection { background: var(--select); color: #fff; }
+
+  a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--accent);
+  }
+  a:hover, a:focus-visible {
+    color: #fff;
+    background: var(--select);
+    border-bottom-color: transparent;
+    outline: none;
+  }
+
+  .tilde  { color: var(--prompt); }
+  .caret  { color: var(--dim); }
+  .cmd    { color: var(--muted); }
+  .label  { color: var(--accent); font-weight: 700; }
+  .host   { font-weight: 700; }
+  .rule   { color: var(--dim); }
+  .hl     { color: var(--amber); }
+  .muted  { color: var(--muted); }
+
+  .prompt { margin: 0 0 .6rem; }
+  .prompt .tilde { display: block; line-height: 1.2; }
+
+  section { margin-bottom: 2.25rem; }
+  section p { margin: 0 0 .75rem; }
+
+  /* fetch-style intro: logo left, info right */
+  .fetch {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+  pre.logo {
+    margin: 0;
+    color: var(--accent);
+    font-weight: 700;
+    line-height: 1.2;
+    font-size: .95rem;
+  }
+  .info p { margin: 0; }
+
+  /* short key/value lists (homelab, log) */
+  .list { margin: 0; padding: 0; list-style: none; }
+  .list li { margin: .2rem 0; }
+  .list .name { color: var(--accent); font-weight: 700; display: inline-block; min-width: 12ch; }
+
+  /* project entries: name + status tag on one line, description indented */
+  .entries { margin: 0; padding: 0; list-style: none; }
+  .entries li { margin: 0 0 1.25rem; }
+  .entries .title { font-weight: 700; }
+  .entries .title .name { color: var(--accent); }
+  .entries .desc { display: block; padding-left: 2ch; }
+  .entries .stack { display: block; padding-left: 2ch; color: var(--muted); font-size: .88rem; }
+
+  /* status tags */
+  .tag { font-weight: 400; font-size: .88rem; margin-left: .5ch; }
+  .tag.active  { color: var(--amber); }
+  .tag.ongoing { color: var(--prompt); }
+  .tag.shipped { color: var(--accent); }
+  .tag.private { color: var(--muted); }
+
+  nav ul { display: flex; flex-wrap: wrap; gap: .25rem 1.5rem; list-style: none; margin: 0; padding: 0; }
+
+  .cursor {
+    display: inline-block;
+    width: .6ch;
+    height: 1.1em;
+    vertical-align: text-bottom;
+    background: var(--fg);
+    animation: blink 1.1s steps(1) infinite;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { .cursor { animation: none; } }
+
+  footer { color: var(--muted); font-size: .85rem; }
+
+  @media (max-width: 640px) {
+    body { font-size: 15px; padding-top: 1.5rem; }
+    .fetch { grid-template-columns: 1fr; gap: 1rem; }
+    pre.logo { font-size: .85rem; }
+    .list .name { display: block; min-width: 0; }
+  }
+</style>
+</head>
+<body>
+<main>
+
+  <section aria-label="Intro">
+    <p class="prompt"><span class="tilde">~</span><span class="caret">❯</span> <span class="cmd">fetch</span></p>
+    <div class="fetch">
+<pre class="logo" aria-hidden="true">  ____
+ |  _ \
+ | |_) |
+ |  _ &lt;
+ | |_) |
+ |____/
+   ::
+  _||_
+ &gt;_  _&lt;</pre>
+      <div class="info">
+        <p class="host">braxton@braxtonandrew.com</p>
+        <p class="rule">-------------------------</p>
+        <p><span class="label">Building</span>: Kubernetes + chaos on AWS</p>
+        <p><span class="label">Learning</span>: EKS, Helm, Terraform</p>
+        <p><span class="label">Running</span>: a homelab on Proxmox</p>
+        <p><span class="label">Stack</span>: AWS, Linux, Docker, Git</p>
+        <p><span class="label">Shell</span>: zsh 5.9</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" aria-label="About">
+    <p class="prompt"><span class="tilde">~</span><span class="caret">❯</span> <span class="cmd">cat README.md</span></p>
+    <p>This is my workbench: the cloud, infrastructure and homelab projects I'm building, breaking and fixing. The code and write-ups live in the repos.</p>
+  </section>
+
+  <section aria-label="Navigation">
+    <p class="prompt"><span class="tilde">~</span><span class="caret">❯</span> <span class="cmd">ls</span></p>
+    <nav>
+      <ul>
+        <li><a href="#projects">projects/</a></li>
+        <li><a href="#homelab">homelab/</a></li>
+        <li><a href="#log">log</a></li>
+        <li><a href="#contact">contact</a></li>
+      </ul>
+    </nav>
+  </section>
+
+  <section id="projects">
+    <p class="prompt"><span class="tilde">~/projects</span><span class="caret">❯</span> <span class="cmd">ls -l</span></p>
+    <ul class="entries">
+      <li>
+        <span class="title"><span class="name">aws-onlineboutique-chaos/</span><span class="tag active">[active]</span></span>
+        <span class="desc">Terraform and Kubernetes on AWS, running Google's Online Boutique demo app. The roadmap covers EKS, Helm, observability, CI/CD, and chaos engineering experiments with Chaos Mesh. I'm learning Kubernetes as I go.</span>
+        <span class="stack">Terraform &middot; EKS &middot; Helm &middot; Chaos Mesh</span>
+      </li>
+      <li>
+        <span class="title"><span class="name">homelab/</span><span class="tag ongoing">[ongoing]</span></span>
+        <span class="desc">Self-hosted services on a Proxmox host, with every stack kept as Docker Compose in Git. Current work: Nextcloud and OnlyOffice as a Google Drive replacement.</span>
+        <span class="stack">Proxmox &middot; Docker Compose &middot; Tailscale &middot; Prometheus &middot; Grafana</span>
+      </li>
+      <li>
+        <span class="title"><a href="https://github.com/BraxtonAndrew/aws-monitored-webserver">aws-monitored-webserver/</a><span class="tag shipped">[shipped]</span></span>
+        <span class="desc">A web server on AWS built entirely with Terraform. GitHub Actions plans on every pull request and applies on merge, authenticating to AWS with OIDC instead of stored keys. A CloudWatch CPU alarm emails me through SNS.</span>
+        <span class="stack">Terraform &middot; GitHub Actions &middot; EC2 &middot; CloudWatch &middot; SNS</span>
+      </li>
+      <li>
+        <span class="title"><a href="https://github.com/BraxtonAndrew/aws-serverless-url-shortener">aws-serverless-url-shortener/</a><span class="tag shipped">[shipped]</span></span>
+        <span class="desc">A serverless URL shortener, defined in Terraform.</span>
+        <span class="stack">Terraform &middot; API Gateway &middot; Lambda &middot; DynamoDB</span>
+      </li>
+      <li>
+        <span class="title"><span class="name">nixos-config/</span><span class="tag private">[private]</span></span>
+        <span class="desc">A reproducible NixOS configuration and dotfiles (zsh, starship, kitty, fastfetch) for my machines.</span>
+        <span class="stack">NixOS &middot; Git</span>
+      </li>
+      <li>
+        <span class="title"><span class="name">braxtonandrew.com/</span><span class="tag active">[new]</span></span>
+        <span class="desc">This page. Static HTML and CSS with no JavaScript, themed from my own terminal config (the Adapta Nokto Maia palette, with the blue hue-shifted to green).</span>
+      </li>
+    </ul>
+  </section>
+
+  <section id="homelab">
+    <p class="prompt"><span class="tilde">~/homelab</span><span class="caret">❯</span> <span class="cmd">ls</span></p>
+    <ul class="list">
+      <li><span class="name">compute</span>Proxmox, Debian VM, Docker Compose</li>
+      <li><span class="name">monitoring</span>Prometheus, Grafana, Uptime Kuma, ntfy</li>
+      <li><span class="name">networking</span>Tailscale, Pi-hole, site-to-site link</li>
+      <li><span class="name">services</span>Nextcloud, OnlyOffice, Immich, Jellyfin, Gitea</li>
+      <li><span class="name">backups</span>Encrypted nightly offsite</li>
+    </ul>
+  </section>
+
+  <section id="log">
+    <p class="prompt"><span class="tilde">~</span><span class="caret">❯</span> <span class="cmd">git log --oneline --date=short</span></p>
+    <ul class="list">
+      <li><span class="name">2026-11-04</span>Nextcloud + OnlyOffice running as a Google Drive replacement</li>
+      <li><span class="name">2026-10-31</span>Every homelab service migrated into a Git-managed Debian VM</li>
+      <li><span class="name">2026-10-30</span>Proxmox installed on the homelab host</li>
+      <li><span class="name">2026-10-11</span>Serverless URL shortener finished</li>
+      <li><span class="name">2026-09-23</span>Monitored web server: Terraform, CI/CD and alerts working end to end</li>
+    </ul>
+  </section>
+
+  <section id="contact">
+    <p class="prompt"><span class="tilde">~</span><span class="caret">❯</span> <span class="cmd">contact --show</span></p>
+    <p><span class="label">github</span>: <a href="https://github.com/BraxtonAndrew">github.com/BraxtonAndrew</a></p>
+    <p><span class="label">email</span>: <a href="mailto:me@braxtonandrew.com">me@braxtonandrew.com</a></p>
+  </section>
+
+  <section aria-label="Prompt">
+    <p class="prompt"><span class="tilde">~</span></p>
+    <p style="margin:0"><span class="caret">❯</span> <span class="cursor" aria-hidden="true"></span></p>
+  </section>
+
+  <footer>&copy; Braxton Andrew &middot; static HTML + CSS, no JavaScript</footer>
+
+</main>
+</body>
+</html>
